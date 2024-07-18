@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @StateObject private var authController = AuthController()
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var email: String = ""
     @State private var phone: String = ""
     @State private var password: String = ""
+    @State private var isSignedUp: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -61,6 +63,12 @@ struct SignUpView: View {
                     .padding(.horizontal)
             }
             
+            if let errorMessage = authController.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding()
+            }
+            
             HStack(spacing: 20) {
                 SocialButton(icon: "g.circle.fill")
                 SocialButton(icon: "f.circle.fill")
@@ -79,15 +87,26 @@ struct SignUpView: View {
                     .cornerRadius(25)
                     .padding(.horizontal)
             }
+            
         }
         .padding()
     }
+        .navigationDestination(isPresented: $isSignedUp){
+            AddExpenseView()
+        }
 }
 
     func signUp() {
-        // Implement your sign-up logic here
-        print("Signing up with: First Name: \(firstName), Last Name: \(lastName), Email: \(email), Phone: \(phone), Password: \(password)")
-        // Example: Validate input, create user account, etc.
+        let user = UserModel(firstName: firstName, lastName: lastName, email: email, phone: phone, password: password)
+        authController.signUp(user: user) { success in
+            if success {
+                print("User signed up successfully")
+                isSignedUp = true
+                // Navigate to another view or show success message
+            } else {
+                print("Error signing up user")
+            }
+        }
     }
 }
 

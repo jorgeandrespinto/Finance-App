@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SignInView: View {
+    @StateObject private var authController = AuthController()
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var isSignedIn: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -60,6 +62,12 @@ struct SignInView: View {
                         .padding(.horizontal)
                 }
                 
+                if let errorMessage = authController.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
                 HStack(spacing: 20) {
                     SocialButton(icon: "g.circle.fill")
                     SocialButton(icon: "f.circle.fill")
@@ -81,23 +89,20 @@ struct SignInView: View {
             }
             .padding()
         }
+        .navigationDestination(isPresented: $isSignedIn) {
+            AddExpenseView()
+        }
     }
     func signIn() {
-        // Implement your sign-in logic here
-        print("Signing in with email: \(email) and password: \(password)")
-        // Example: You can validate credentials here or perform authentication
-    }
-    
-    func forgotPassword() {
-        // Implement your forgot password logic here
-        print("Forgot password tapped")
-        // Example: Show a forgot password dialog or navigate to another screen
-    }
-    
-    func signUp() {
-        // Implement your sign-up logic here
-        print("Sign Up tapped")
-        // Example: Navigate to the sign-up screen
+        authController.signIn(email: email, password: password) { success in
+            if success {
+                print("User signed in successfully")
+                isSignedIn = true
+                
+            } else {
+                print("Error signing in user")
+            }
+        }
     }
 
 }
