@@ -31,6 +31,7 @@
 		6909E6AF2C3CD0C2001FDD58 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 6909E6AE2C3CD0C2001FDD58 /* FirebaseStorageCombine-Community */; };
 		6909E6B12C48B4B7001FDD58 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909E6B02C48B4B7001FDD58 /* UserModel.swift */; };
 		6909E6B42C48B525001FDD58 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909E6B32C48B525001FDD58 /* AuthController.swift */; };
+		6909E6B72C49FC62001FDD58 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909E6B62C49FC62001FDD58 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		6909E6932C3CCB60001FDD58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6909E6B02C48B4B7001FDD58 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		6909E6B32C48B525001FDD58 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		6909E6B62C49FC62001FDD58 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			children = (
 				6909E67E2C3C559C001FDD58 /* ContentView.swift */,
 				6909E6912C3CC91B001FDD58 /* AddExpenseView.swift */,
+				6909E6B62C49FC62001FDD58 /* HomeView.swift */,
 				6909E68F2C3CB1AA001FDD58 /* PasswordRecoveryView.swift */,
 				6909E68B2C3CAB11001FDD58 /* SignInView.swift */,
 				6909E68D2C3CAD4D001FDD58 /* SignUpView.swift */,
@@ -227,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6909E6B72C49FC62001FDD58 /* HomeView.swift in Sources */,
 				6909E68E2C3CAD4D001FDD58 /* SignUpView.swift in Sources */,
 				6909E6B12C48B4B7001FDD58 /* UserModel.swift in Sources */,
 				6909E68C2C3CAB11001FDD58 /* SignInView.swift in Sources */,

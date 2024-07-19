@@ -92,7 +92,7 @@ struct SignUpView: View {
         .padding()
     }
         .navigationDestination(isPresented: $isSignedUp){
-            AddExpenseView()
+            HomeView()
         }
 }
 

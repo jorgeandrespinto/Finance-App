@@ -90,7 +90,7 @@ struct SignInView: View {
             .padding()
         }
         .navigationDestination(isPresented: $isSignedIn) {
-            AddExpenseView()
+            HomeView()
         }
     }
     func signIn() {
