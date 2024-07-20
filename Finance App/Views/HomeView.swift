@@ -91,7 +91,7 @@ struct HomeView: View {
                             .foregroundColor(.gray)
                     }
                     Spacer()
-                    NavigationLink(destination: Text("Add View")) {
+                    NavigationLink(destination: AddExpenseAndIncomeView()) {
                         Image(systemName: "plus.rectangle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
