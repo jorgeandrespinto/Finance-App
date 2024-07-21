@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -26,7 +28,6 @@ struct HomeView: View {
                             .frame(height: 30)
                             .foregroundColor(.gray)
                             .padding()
-                        
                     }
                     .padding(.horizontal)
                     HStack {
@@ -38,33 +39,33 @@ struct HomeView: View {
                             .foregroundColor(.gray)
                     }
                     
-                    Text("-$7.50")
+                    Text(viewModel.expenses.reduce(0) { $0 + (Double($1.amount) ?? 0) }, format: .currency(code: "USD"))
                         .font(.system(size: 50, weight: .bold))
                         .foregroundColor(.gray)
                 }
                 ZStack {
                     Color.white.ignoresSafeArea(edges: .all)
-                    List {
+                    List(viewModel.expenses) { expense in
                         Section(header: Text("TODAY")) {
                             HStack {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color.cyan)
+                                        .fill(Color(hex: expense.color))
                                         .frame(width: 50, height: 50, alignment: .center)
-                                    Text("🍔")
+                                    Text(expense.emoji)
                                         .font(.system(size: 30))
                                         .padding()
                                 }
                                 VStack(alignment: .leading) {
-                                    Text("Starbucks Drink")
+                                    Text(expense.note)
                                         .font(.headline)
-                                    Text("8:20 PM")
+                                    Text(expense.date)
                                         .font(.subheadline)
                                         .foregroundColor(.gray)
                                 }
                                 Spacer()
-                                Text("-$7.50")
-                                    .foregroundColor(.gray)
+                                Text("$\(expense.amount)")
+                                    .foregroundColor(expense.isExpense ? .red : .gray)
                             }
                             .listRowBackground(Color(.white))
                         }
@@ -119,6 +120,21 @@ struct HomeView: View {
                 }
             }
         }
+    }
+}
+
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.currentIndex = scanner.string.startIndex
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+        
+        let red = Double((rgbValue & 0xFF0000) >> 16) / 255.0
+        let green = Double((rgbValue & 0x00FF00) >> 8) / 255.0
+        let blue = Double(rgbValue & 0x0000FF) / 255.0
+        
+        self.init(red: red, green: green, blue: blue)
     }
 }
 

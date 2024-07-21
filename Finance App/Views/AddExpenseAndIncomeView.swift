@@ -15,6 +15,8 @@ struct AddExpenseAndIncomeView: View {
     @State private var note: String = ""
     @State private var date: Date = Date()
     @State private var category: String = "Food"
+    @State private var emoji: String = "🍔"
+    @State private var color: String = "cyan"
 
     let columns = [
         GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())
@@ -163,7 +165,9 @@ struct AddExpenseAndIncomeView: View {
             category: category,
             date: dateString,
             isExpense: isExpense,
-            note: note
+            note: note,
+            emoji: emoji,
+            color: color
         )
     }
 }

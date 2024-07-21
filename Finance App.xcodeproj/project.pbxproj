@@ -34,6 +34,7 @@
 		6909E6B92C4B5CA8001FDD58 /* AddExpenseAndIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909E6B82C4B5CA8001FDD58 /* AddExpenseAndIncomeView.swift */; };
 		6909E6BB2C4B6921001FDD58 /* ExpenseIncome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909E6BA2C4B6921001FDD58 /* ExpenseIncome.swift */; };
 		6909E6BD2C4B69A6001FDD58 /* AddExpenseAndIncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909E6BC2C4B69A6001FDD58 /* AddExpenseAndIncomeViewModel.swift */; };
+		6909E6BF2C4D8615001FDD58 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909E6BE2C4D8615001FDD58 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		6909E6B82C4B5CA8001FDD58 /* AddExpenseAndIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseAndIncomeView.swift; sourceTree = "<group>"; };
 		6909E6BA2C4B6921001FDD58 /* ExpenseIncome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseIncome.swift; sourceTree = "<group>"; };
 		6909E6BC2C4B69A6001FDD58 /* AddExpenseAndIncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseAndIncomeViewModel.swift; sourceTree = "<group>"; };
+		6909E6BE2C4D8615001FDD58 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			children = (
 				6909E6B32C48B525001FDD58 /* AuthController.swift */,
 				6909E6BC2C4B69A6001FDD58 /* AddExpenseAndIncomeViewModel.swift */,
+				6909E6BE2C4D8615001FDD58 /* HomeViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				6909E6BB2C4B6921001FDD58 /* ExpenseIncome.swift in Sources */,
 				6909E6B12C48B4B7001FDD58 /* UserModel.swift in Sources */,
 				6909E68C2C3CAB11001FDD58 /* SignInView.swift in Sources */,
+				6909E6BF2C4D8615001FDD58 /* HomeViewModel.swift in Sources */,
 				6909E6902C3CB1AA001FDD58 /* PasswordRecoveryView.swift in Sources */,
 				6909E6B42C48B525001FDD58 /* AuthController.swift in Sources */,
 				6909E67F2C3C559C001FDD58 /* ContentView.swift in Sources */,
