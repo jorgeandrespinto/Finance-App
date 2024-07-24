@@ -16,7 +16,7 @@ struct AddExpenseAndIncomeView: View {
     @State private var date: Date = Date()
     @State private var category: String = "Food"
     @State private var emoji: String = "🍔"
-    @State private var color: String = "cyan"
+    @State private var color: String = "FF5733"
 
     let columns = [
         GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())

@@ -30,6 +30,7 @@ struct HomeView: View {
                             .padding()
                     }
                     .padding(.horizontal)
+                    
                     HStack {
                         Text("Net total")
                             .font(.headline)
@@ -39,41 +40,50 @@ struct HomeView: View {
                             .foregroundColor(.gray)
                     }
                     
-                    Text(viewModel.expenses.reduce(0) { $0 + (Double($1.amount) ?? 0) }, format: .currency(code: "USD"))
+                    let netTotal = viewModel.groupedExpenses.flatMap { $0.value }
+                        .reduce(0.0) { $0 + (Double($1.amount) ?? 0.0) * ($1.isExpense ? -1 : 1) }
+                    
+                    Text(String(format: "$%.2f", netTotal))
                         .font(.system(size: 50, weight: .bold))
-                        .foregroundColor(.gray)
+                        .foregroundColor(netTotal < 0 ? .red : .blue)
                 }
+                
                 ZStack {
                     Color.white.ignoresSafeArea(edges: .all)
-                    List(viewModel.expenses) { expense in
-                        Section(header: Text("TODAY")) {
-                            HStack {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(hex: expense.color))
-                                        .frame(width: 50, height: 50, alignment: .center)
-                                    Text(expense.emoji)
-                                        .font(.system(size: 30))
-                                        .padding()
+                    List {
+                        ForEach(viewModel.sortedKeys, id: \.self) { key in
+                            Section(header: Text(key)) {
+                                ForEach(viewModel.groupedExpenses[key]!) { expense in
+                                    HStack {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(Color(hex: expense.color))
+                                                .frame(width: 50, height: 50, alignment: .center)
+                                            Text(expense.emoji)
+                                                .font(.system(size: 30))
+                                                .padding()
+                                        }
+                                        VStack(alignment: .leading) {
+                                            Text(expense.note)
+                                                .font(.headline)
+                                            Text(self.extractTime(from: expense.date))
+                                                .font(.subheadline)
+                                                .foregroundColor(.gray)
+                                        }
+                                        Spacer()
+                                        Text(String(format: "$%.2f", Double(expense.amount) ?? 0.00))
+                                            .foregroundColor(expense.isExpense ? .red : .gray)
+                                    }
+                                    .listRowBackground(Color(.white))
                                 }
-                                VStack(alignment: .leading) {
-                                    Text(expense.note)
-                                        .font(.headline)
-                                    Text(expense.date)
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                                Spacer()
-                                Text("$\(expense.amount)")
-                                    .foregroundColor(expense.isExpense ? .red : .gray)
                             }
-                            .listRowBackground(Color(.white))
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
                     .background(Color(.white))
                 }
                 .background(Color.white)
+                
                 Spacer()
                 
                 HStack {
@@ -120,6 +130,17 @@ struct HomeView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+    }
+    
+    private func extractTime(from dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        guard let date = dateFormatter.date(from: dateString) else { return dateString }
+        
+        dateFormatter.dateFormat = "h:mm a"
+        return dateFormatter.string(from: date)
     }
 }
 

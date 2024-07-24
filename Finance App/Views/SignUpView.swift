@@ -94,6 +94,7 @@ struct SignUpView: View {
         .navigationDestination(isPresented: $isSignedUp){
             HomeView()
         }
+        .navigationBarBackButtonHidden(true)
 }
 
     func signUp() {

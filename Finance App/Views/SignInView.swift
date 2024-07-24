@@ -12,6 +12,8 @@ struct SignInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isSignedIn: Bool = false
+    @State private var isPasswordVisible: Bool = false
+    
     
     var body: some View {
         NavigationStack {
@@ -27,15 +29,17 @@ struct SignInView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.horizontal)
                     HStack{
-                        SecureField("Password", text: $password)
+                        PasswordField(password: $password, isPasswordVisible: $isPasswordVisible)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .padding(.horizontal)
+                        
                         Button(action: {
-                            // Action for social button
+                            isPasswordVisible.toggle()
                         }) {
-                            Image(systemName: "eye")
+                            Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
                                 .foregroundColor(.green)
                         }
+                        .padding(.horizontal)
                     }
                     HStack {
                         NavigationLink(destination: PasswordRecovery()){
@@ -92,7 +96,9 @@ struct SignInView: View {
         .navigationDestination(isPresented: $isSignedIn) {
             HomeView()
         }
+        .navigationBarBackButtonHidden(true)
     }
+    
     func signIn() {
         authController.signIn(email: email, password: password) { success in
             if success {
@@ -106,6 +112,22 @@ struct SignInView: View {
     }
 
 }
+
+struct PasswordField: View {
+    @Binding var password: String
+    @Binding var isPasswordVisible: Bool
+
+    var body: some View {
+        ZStack(alignment: .trailing) {
+            if isPasswordVisible {
+                TextField("Password", text: $password)
+            } else {
+                SecureField("Password", text: $password)
+            }
+        }
+    }
+}
+
 
 #Preview {
     SignInView()
